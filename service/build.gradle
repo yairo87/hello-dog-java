@@ -83,10 +83,6 @@ dependencies {
 
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '6.0.1'
-}
-
 test {
     testLogging {
         events "passed", "skipped", "failed", "standardOut", "standardError"
