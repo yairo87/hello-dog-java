@@ -1,0 +1,6 @@
+management:
+  endpoints:
+    web:
+      base-path: /
+hello-world:
+  service-owner: Moishe
