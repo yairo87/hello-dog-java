@@ -6,5 +6,5 @@ public interface DogsDao {
 
     long store(Dog dog);
     Optional<Dog> getById(long dogId);
-
+    void deleteById(long dogId);
 }

@@ -33,4 +33,15 @@ public class DogsController {
         return dogsService.getDog(dogId);
     }
 
+    @DeleteMapping("/{dogId}")
+    public void deleteDog(@PathVariable long dogId) {
+        log.info("deleting dog with ID {}", dogId);
+        dogsService.deleteById(dogId);
+    }
+
+    @ExceptionHandler(DogNotFoundException.class)
+    public ResponseEntity<Dog> dogNotFound(){
+        return ResponseEntity.notFound().build();
+    }
+
 }

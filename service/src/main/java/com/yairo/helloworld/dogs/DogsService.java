@@ -27,4 +27,8 @@ public class DogsService {
         }
         return dog.get();
     }
+
+    public void deleteById(long dogId) {
+        this.dogsDao.deleteById(dogId);
+    }
 }
