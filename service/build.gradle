@@ -1,6 +1,6 @@
 buildscript {
     ext.deps = [
-            springBootVersion: "2.2.1.RELEASE",
+            springBootVersion: "3.0.2",
             log4jVersion     : "2.20.0",
             lombockVersion   : "1.18.26"
     ]
