@@ -1,8 +1,8 @@
 buildscript {
     ext.deps = [
             springBootVersion: "2.2.1.RELEASE",
-            log4jVersion     : "2.12.1",
-            lombockVersion   : "1.18.10"
+            log4jVersion     : "2.20.0",
+            lombockVersion   : "1.18.26"
     ]
     repositories {
         mavenCentral()
