@@ -1,6 +1,6 @@
 buildscript {
     ext.deps = [
-            springBootVersion: "2.7.9",
+            springBootVersion: "3.0.3",
             log4jVersion     : "2.20.0",
             lombockVersion   : "1.18.26"
     ]
@@ -63,9 +63,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web") {
         exclude module: "spring-boot-starter-tomcat"
     }
-    implementation "org.springframework.boot:spring-boot-starter-jetty"
     implementation "org.springframework.boot:spring-boot-starter-actuator"
     implementation "org.springframework.cloud:spring-cloud-starter-sleuth:3.1.6"
+    implementation "org.springframework.boot:spring-boot-starter-web:${deps.springBootVersion}"
 
     //Swagger doc
     implementation "io.springfox:springfox-swagger2:3.0.0"
