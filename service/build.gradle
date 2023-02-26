@@ -37,10 +37,8 @@ repositories {
     jcenter()
 }
 
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(19))
-    }
+tasks.withType(JavaCompile) {
+    options.release = 19
 }
 
 dependencies {
