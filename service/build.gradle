@@ -58,6 +58,7 @@ dependencies {
     annotationProcessor "org.projectlombok:lombok:${deps.lombockVersion}"
     testCompileOnly "org.projectlombok:lombok:${deps.lombockVersion}"
     testAnnotationProcessor "org.projectlombok:lombok:${deps.lombockVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-core:2.14.2"
 
     //Spring
     implementation("org.springframework.boot:spring-boot-starter-web") {
@@ -75,6 +76,7 @@ dependencies {
     testImplementation "junit:junit"
     testImplementation "org.springframework.boot:spring-boot-starter-test:${deps.springBootVersion}"
     testImplementation "org.junit.jupiter:junit-jupiter"
+
     //Cucumber
     testImplementation "io.cucumber:cucumber-java:7.11.1"
     testImplementation "io.cucumber:cucumber-junit:7.11.1"
