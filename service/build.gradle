@@ -1,14 +1,16 @@
 buildscript {
     ext.deps = [
-            springBootVersion: "2.2.1.RELEASE",
+            springBootVersion: "3.0.3",
             log4jVersion     : "2.20.0",
             lombockVersion   : "1.18.26"
     ]
     repositories {
         mavenCentral()
+        maven { url 'https://repo.spring.io/milestone' }
+        gradlePluginPortal()
     }
     dependencies {
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.2.1.RELEASE"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${deps.springBootVersion}"
     }
 }
 
@@ -35,9 +37,6 @@ repositories {
     jcenter()
 }
 
-sourceCompatibility = 1.11
-targetCompatibility = 1.11
-
 dependencies {
     configurations {
         all*.exclude group: "org.springframework.boot", module: "spring-boot-starter-logging"
@@ -46,12 +45,13 @@ dependencies {
         all*.exclude group: "org.slf4j", module: "slf4j-simple"
         testCompile.exclude group: "org.springframework.cloud", module: "spring-cloud-starter-vault-config"
     }
-    compile "org.springframework.boot:spring-boot-starter-log4j2:${deps.springBootVersion}"
-    compile "org.apache.logging.log4j:log4j-api:${deps.log4jVersion}"
-    compile "org.apache.logging.log4j:log4j-core:${deps.log4jVersion}"
-    compile "org.apache.logging.log4j:log4j-web:${deps.log4jVersion}"
-    compile "org.apache.logging.log4j:log4j-jcl:${deps.log4jVersion}"
-    compile "org.apache.logging.log4j:log4j-slf4j-impl:${deps.log4jVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-log4j2:${deps.springBootVersion}"
+    implementation "org.apache.logging.log4j:log4j-api:${deps.log4jVersion}"
+    implementation "org.apache.logging.log4j:log4j-core:${deps.log4jVersion}"
+    implementation "org.apache.logging.log4j:log4j-web:${deps.log4jVersion}"
+    implementation "org.apache.logging.log4j:log4j-jcl:${deps.log4jVersion}"
+    implementation "org.apache.logging.log4j:log4j-slf4j-impl:${deps.log4jVersion}"
+    implementation group: 'com.google.guava', name: 'guava', version: '31.1-jre'
 
     //General
     compileOnly "org.projectlombok:lombok:${deps.lombockVersion}"
@@ -60,26 +60,25 @@ dependencies {
     testAnnotationProcessor "org.projectlombok:lombok:${deps.lombockVersion}"
 
     //Spring
-    compile("org.springframework.boot:spring-boot-starter-web") {
+    implementation("org.springframework.boot:spring-boot-starter-web") {
         exclude module: "spring-boot-starter-tomcat"
     }
-    compile "org.springframework.boot:spring-boot-starter-jetty"
-    compile "org.springframework.boot:spring-boot-starter-actuator"
-    compile "org.springframework.cloud:spring-cloud-starter-sleuth:2.2.0.RELEASE"
-
-    //Swagger doc
-    compile "io.springfox:springfox-swagger2:2.9.2"
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+    implementation "org.springframework.cloud:spring-cloud-starter-sleuth:3.1.6"
+    implementation "org.springframework.boot:spring-boot-starter-web:${deps.springBootVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-validation:${deps.springBootVersion}"
+    implementation "jakarta.validation:jakarta.validation-api:3.0.2"
 
     //Java test
-    testCompile "org.hamcrest:hamcrest-all:1.3"
-    testCompile "org.mockito:mockito-core:3.1.0"
-    testCompile "junit:junit"
-    testCompile "org.springframework.boot:spring-boot-starter-test:${deps.springBootVersion}"
-
+    testImplementation "org.hamcrest:hamcrest-all:1.3"
+    testImplementation "org.mockito:mockito-core:5.1.1"
+    testImplementation "junit:junit"
+    testImplementation "org.springframework.boot:spring-boot-starter-test:${deps.springBootVersion}"
+    testImplementation "org.junit.jupiter:junit-jupiter"
     //Cucumber
-    testCompile "io.cucumber:cucumber-java:4.8.0"
-    testCompile "io.cucumber:cucumber-junit:4.8.0"
-    testCompile "io.cucumber:cucumber-spring:4.8.0"
+    testImplementation "io.cucumber:cucumber-java:7.11.1"
+    testImplementation "io.cucumber:cucumber-junit:7.11.1"
+    testImplementation "io.cucumber:cucumber-spring:7.11.1"
 
 }
 
