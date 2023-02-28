@@ -8,7 +8,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Dog {
-
+    public Dog(String name, String owner){
+        this.name = name;
+        this.owner = owner;
+    }
+    private String id;
     private String name;
     private String owner;
 
