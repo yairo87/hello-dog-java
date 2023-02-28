@@ -5,33 +5,31 @@ import org.springframework.stereotype.Component;
 
 import java.util.Map;
 import java.util.Optional;
-import java.util.Random;
+import java.util.UUID;
 
 @Component
 public class InMemDogsDao implements DogsDao {
 
-    private Map<Long, Dog> dogsById;
-    private Random random;
+    private Map<String, Dog> dogsById;
 
     public InMemDogsDao(){
         this.dogsById = Maps.newHashMap();
-        this.random = new Random();
     }
 
     @Override
-    public long store(Dog dog) {
-        long newId = this.random.nextLong();
+    public String store(Dog dog) {
+        String newId = UUID.randomUUID().toString();
         this.dogsById.put(newId, dog);
         return newId;
     }
 
     @Override
-    public Optional<Dog> getById(long dogId) {
+    public Optional<Dog> getById(String dogId) {
         return Optional.ofNullable(this.dogsById.get(dogId));
     }
 
     @Override
-    public void deleteById(long dogId) {
+    public void deleteById(String dogId) {
         this.dogsById.remove(dogId);
     }
 

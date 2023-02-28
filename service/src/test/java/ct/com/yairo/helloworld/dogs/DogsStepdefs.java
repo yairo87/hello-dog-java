@@ -17,7 +17,7 @@ public class DogsStepdefs {
 
     private RestTemplate restTemplate = new RestTemplate();
     private Dog dog;
-    private Long dogId;
+    private String dogId;
 
     @Given("I create a dog named {word} owned by {word}")
     public void createNewDog(String dogName, String dogOwner) {
@@ -26,7 +26,7 @@ public class DogsStepdefs {
 
     @When("I store the dog")
     public void postNewDog(){
-        ResponseEntity<Long> response = restTemplate.postForEntity("http://localhost:8080/v1/dogs", this.dog, Long.class);
+        ResponseEntity<String> response = restTemplate.postForEntity("http://localhost:8080/v1/dogs", this.dog, String.class);
         this.dogId = response.getBody();
         Assert.assertEquals(HttpStatus.CREATED, response.getStatusCode());
     }

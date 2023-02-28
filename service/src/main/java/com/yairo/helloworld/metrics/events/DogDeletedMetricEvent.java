@@ -9,5 +9,5 @@ import lombok.EqualsAndHashCode;
 @AllArgsConstructor
 public class DogDeletedMetricEvent extends MetricEvent {
     private final int metricId = 2;
-    private long id;
+    private String id;
 }

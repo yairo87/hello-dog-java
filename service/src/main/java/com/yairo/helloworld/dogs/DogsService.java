@@ -21,13 +21,13 @@ public class DogsService {
         this.metricsReporter = metricsReporter;
     }
 
-    public long store(Dog dog){
-        long storedDogId = dogsDao.store(dog);
+    public String store(Dog dog){
+        String storedDogId = dogsDao.store(dog);
         this.metricsReporter.sendMetricEvent(new DogCreatedMetricEvent(storedDogId, dog.getName()));
         return storedDogId;
     }
 
-    public Dog getDog(long dogId) {
+    public Dog getDog(String dogId) {
         Optional<Dog> dog = this.dogsDao.getById(dogId);
         if (dog.isEmpty()){
             throw new DogNotFoundException();
@@ -35,7 +35,7 @@ public class DogsService {
         return dog.get();
     }
 
-    public void deleteById(long dogId) {
+    public void deleteById(String dogId) {
         this.dogsDao.deleteById(dogId);
         this.metricsReporter.sendMetricEvent(new DogDeletedMetricEvent(dogId));
     }
