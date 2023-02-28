@@ -19,6 +19,7 @@ public class InMemDogsDao implements DogsDao {
     @Override
     public String store(Dog dog) {
         String newId = UUID.randomUUID().toString();
+        dog.setId(newId);
         this.dogsById.put(newId, dog);
         return newId;
     }
