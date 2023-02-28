@@ -16,9 +16,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Optional;
+import java.util.UUID;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -31,22 +30,24 @@ public class DogsServiceTest {
 
     @Test(expected = DogNotFoundException.class)
     public void shouldThrowAnExceptionOnWrongId(){
-        when(dogsDao.getById(-1L)).thenReturn(Optional.empty());
-        dogsService.getDog(-1L);
+        String nonExistingDogId = UUID.randomUUID().toString();
+        when(dogsDao.getById(nonExistingDogId)).thenReturn(Optional.empty());
+        dogsService.getDog(nonExistingDogId);
     }
 
     @Test
     public void shouldBeAbleToGetDog(){
         Dog dog = new Dog();
-        when(dogsDao.getById(1L)).thenReturn(Optional.of(dog));
-        Assert.assertEquals(dog, dogsService.getDog(1L));
+        String dogId = UUID.randomUUID().toString();
+        when(dogsDao.getById(dogId)).thenReturn(Optional.of(dog));
+        Assert.assertEquals(dog, dogsService.getDog(dogId));
     }
 
     @Test
     public void shouldStoreNewDog(){
         Dog dog = new Dog("Spike", "John");
 
-        long dogId = dogsService.store(dog);
+        String dogId = dogsService.store(dog);
 
         Mockito.verify(metricsReporter).sendMetricEvent(new DogCreatedMetricEvent(dogId, "Spike"));
     }
@@ -54,7 +55,7 @@ public class DogsServiceTest {
     @Test
     public void shouldDeleteDog(){
         Dog dog = new Dog("Spike", "John");
-        long dogId = dogsService.store(dog);
+        String dogId = dogsService.store(dog);
         Mockito.reset(metricsReporter);
 
         dogsService.deleteById(dogId);

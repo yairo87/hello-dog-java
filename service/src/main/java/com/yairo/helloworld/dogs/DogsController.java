@@ -22,19 +22,19 @@ public class DogsController {
     }
 
     @PostMapping
-    public ResponseEntity<Long> createDog(@RequestBody Dog dog) {
+    public ResponseEntity<String> createDog(@RequestBody Dog dog) {
         log.info(config.getServiceOwner() + "! adding new dog {}", dog);
         return ResponseEntity.status(HttpStatus.CREATED).body(dogsService.store(dog));
     }
 
     @GetMapping("/{dogId}")
-    public Dog getDog(@PathVariable long dogId) {
+    public Dog getDog(@PathVariable String dogId) {
         log.info("fetching dog with ID {}", dogId);
         return dogsService.getDog(dogId);
     }
 
     @DeleteMapping("/{dogId}")
-    public void deleteDog(@PathVariable long dogId) {
+    public void deleteDog(@PathVariable String dogId) {
         log.info("deleting dog with ID {}", dogId);
         dogsService.deleteById(dogId);
     }

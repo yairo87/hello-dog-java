@@ -4,7 +4,7 @@ import java.util.Optional;
 
 public interface DogsDao {
 
-    long store(Dog dog);
-    Optional<Dog> getById(long dogId);
-    void deleteById(long dogId);
+    String store(Dog dog);
+    Optional<Dog> getById(String dogId);
+    void deleteById(String dogId);
 }
